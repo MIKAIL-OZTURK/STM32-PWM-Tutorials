@@ -1,24 +1,34 @@
 # 1. PWM Nedir ? 
 
-**PWM**, sabit frekansta ama değişken görev çevrimli (duty cycle) bir kare dalga üretme yöntemidir. Bu yöntem sayesinde dijital pinlerle analog benzeri davranışlar elde edilir.
+**PWM**, bir dijital sinyali aç/kapa (1/0) şeklinde belirli bir frekansta ama farklı sürelerde açık kalacak şekilde üretmektir. Belirli bir süre boyunca sinyal “1” (HIGH) olur, sonra “0” (LOW) olur. Bu döngü sürekli tekrar eder ama esas 
+olay şu: “1” olma süresini değiştirerek bu sinyalin ortalama gücünü kontrol edersin.
 
 
-# 2. PWM Teknik Detayları
+### PWM'nin En Önemli Parametresi: Duty Cycle
+**Duty Cycle**: Sinyalin 1 (HIGH) olduğu sürenin, toplam periyoda oranı
 
-### a. Temel Terimler
-- **Frequency (Frekans)**: PWM sinyalinin saniyedeki periyot sayısıdır (Hz)
+%100 → Sinyal hep HIGH (kesintisiz güç)
 
-- **Duty Cycle (%)**: HIGH seviyede geçirilen sürenin toplam periyoda oranıdır
+%0 → Sinyal hep LOW (hiç güç yok)
 
-- **Resolution (Çözünürlük)**: PWM sinyalinin adımlama hassasiyeti. Bit cinsinden ifade edilir (örneğin: 8-bit PWM → 256 farklı duty cycle değeri)
+%50 → Yarım zaman açık, yarım zaman kapalı
+
+```
+%25 Duty: [___---___---___---]  (az açık)
+%50 Duty: [___===___===___===]  (yarı açık)
+%75 Duty: [___###___###___###]  (çok açık)
+
+```
 
 
-# 3. PWM Nasıl Üretilir ? (STM32)
+# 2. STM32 Timer ile PWM Nasıl Üretilir?
+1. Timer bir periyot süresi belirler (ARR register)
 
-### a. Temel Terimler
-- **Prescaler**: Sistemin clock frenkansını böler
-- **Auto-Reload Register (ARR**): PWM periyodunu belirler
-- **Capture/Compare Register (CCR)**: Duty cycle'ı belirler
+2. Sen bu periyodun ne kadarında çıkışı “1” yapmak istiyorsan, onu CCR register’a yazarsın
+
+3. Timer her periyot başında sıfırlanır ve tekrar sayar
+
+4. Sayı CCR'a gelince çıkış LOW olur → PWM oluşur
 
 
 ### b. Temel Formüller 
