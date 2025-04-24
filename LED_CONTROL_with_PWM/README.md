@@ -20,27 +20,17 @@ PA6 (TIM3_CH1) ----> 330Ω ----> LED ----> GND
 - **ARR (Auto Reload)**: 999 → PWM frekansı: 1 kHz (periyot = 1 ms)
 - **GPIO PA6** → Alternate Function → TIM3_CH1
 
-## Açıklama
+## Açıklama ve Hesaplamalar
 Timer, PWM modunda yapılandırılmıştır. LED'in parlaklığı CCR değeri değiştirilerek kontrol edilir. Kod içinde `__HAL_TIM_SET_COMPARE()` fonksiyonu ile duty cycle yazılımsal olarak artırılıp azaltılır. Böylece LED'in parlaklığı yavaşça artıp azalır.
 
-## PWM Temelleri
-| Terim       | Açıklama                                      |
-|-------------|-----------------------------------------------|
-| ARR         | PWM'in toplam periyodunu belirler             |
-| CCR         | PWM'in HIGH (aktif) kalma süresini belirler   |
-| Duty Cycle  | CCR / ARR oranı (%)                           |
+![HESAPLAMALAR](https://github.com/user-attachments/assets/59360c74-cf56-4f48-94ce-92b41c5928c6)
 
-Örneğin:
 - ARR = 999
 - CCR = 500 → %50 duty cycle (yarı parlak)
 - CCR = 250 → %25 duty cycle (düşük parlak)
 - CCR = 999 → %100 duty cycle (tam parlak)
 
-## Geliştirme Fikirleri
-- Buton ile parlaklık kontrolü
-- Potansiyometre ile (ADC kullanarak) PWM duty ayarlama
-- FreeRTOS ile ayrı task üzerinden PWM kontrolü
-
+  
 ## Proje Videosu 
 
 
