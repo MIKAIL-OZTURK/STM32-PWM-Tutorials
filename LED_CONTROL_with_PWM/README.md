@@ -30,7 +30,7 @@ Timer, PWM modunda yapılandırılmıştır. LED'in parlaklığı CCR değeri de
 Aslında projede belirtilen LED parlaklığnı ayarlamak sadece LED'in HIGH olma süresini oynamaktan ibaret. 
 
 ### 2. Kod 
-```
+```c
 uint32_t pwm_value = 0;
 uint8_t direction = 1;
 
